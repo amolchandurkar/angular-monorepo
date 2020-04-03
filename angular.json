@@ -1,7 +1,251 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "ui-tracker": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/ui/tracker",
+      "sourceRoot": "apps/ui/tracker/src",
+      "prefix": "angular-monorepo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/ui/tracker",
+            "index": "apps/ui/tracker/src/index.html",
+            "main": "apps/ui/tracker/src/main.ts",
+            "polyfills": "apps/ui/tracker/src/polyfills.ts",
+            "tsConfig": "apps/ui/tracker/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/ui/tracker/src/favicon.ico",
+              "apps/ui/tracker/src/assets"
+            ],
+            "styles": ["apps/ui/tracker/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/ui/tracker/src/environments/environment.ts",
+                  "with": "apps/ui/tracker/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ui-tracker:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ui-tracker:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ui-tracker:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/ui/tracker/tsconfig.app.json",
+              "apps/ui/tracker/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/ui/tracker/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/ui/tracker/jest.config.js",
+            "tsConfig": "apps/ui/tracker/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/ui/tracker/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "ui-tracker-e2e": {
+      "root": "apps/ui/tracker-e2e",
+      "sourceRoot": "apps/ui/tracker-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/ui/tracker-e2e/cypress.json",
+            "tsConfig": "apps/ui/tracker-e2e/tsconfig.e2e.json",
+            "devServerTarget": "ui-tracker:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ui-tracker:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/ui/tracker-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/ui/tracker-e2e/**"]
+          }
+        }
+      }
+    },
+    "server-covidapi": {
+      "root": "apps/server/covidapi",
+      "sourceRoot": "apps/server/covidapi/src",
+      "projectType": "application",
+      "prefix": "server-covidapi",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/server/covidapi",
+            "main": "apps/server/covidapi/src/main.ts",
+            "tsConfig": "apps/server/covidapi/tsconfig.app.json",
+            "assets": ["apps/server/covidapi/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/server/covidapi/src/environments/environment.ts",
+                  "with": "apps/server/covidapi/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "server-covidapi:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/server/covidapi/tsconfig.app.json",
+              "apps/server/covidapi/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/server/covidapi/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/server/covidapi/jest.config.js",
+            "tsConfig": "apps/server/covidapi/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "server-trackerapi": {
+      "root": "apps/server/trackerapi",
+      "sourceRoot": "apps/server/trackerapi/src",
+      "projectType": "application",
+      "prefix": "server-trackerapi",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/server/trackerapi",
+            "main": "apps/server/trackerapi/src/main.ts",
+            "tsConfig": "apps/server/trackerapi/tsconfig.app.json",
+            "assets": ["apps/server/trackerapi/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/server/trackerapi/src/environments/environment.ts",
+                  "with": "apps/server/trackerapi/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "server-trackerapi:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/server/trackerapi/tsconfig.app.json",
+              "apps/server/trackerapi/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/server/trackerapi/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/server/trackerapi/jest.config.js",
+            "tsConfig": "apps/server/trackerapi/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  }
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "ui-tracker"
 }

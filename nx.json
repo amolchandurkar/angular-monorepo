@@ -18,5 +18,19 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "ui-tracker": {
+      "tags": []
+    },
+    "ui-tracker-e2e": {
+      "tags": [],
+      "implicitDependencies": ["ui-tracker"]
+    },
+    "server-covidapi": {
+      "tags": []
+    },
+    "server-trackerapi": {
+      "tags": []
+    }
+  }
 }
