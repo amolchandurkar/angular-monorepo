@@ -124,61 +124,6 @@
         }
       }
     },
-    "server-covidapi": {
-      "root": "apps/server/covidapi",
-      "sourceRoot": "apps/server/covidapi/src",
-      "projectType": "application",
-      "prefix": "server-covidapi",
-      "schematics": {},
-      "architect": {
-        "build": {
-          "builder": "@nrwl/node:build",
-          "options": {
-            "outputPath": "dist/apps/server/covidapi",
-            "main": "apps/server/covidapi/src/main.ts",
-            "tsConfig": "apps/server/covidapi/tsconfig.app.json",
-            "assets": ["apps/server/covidapi/src/assets"]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/server/covidapi/src/environments/environment.ts",
-                  "with": "apps/server/covidapi/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "server-covidapi:build"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "apps/server/covidapi/tsconfig.app.json",
-              "apps/server/covidapi/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**", "!apps/server/covidapi/**"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/server/covidapi/jest.config.js",
-            "tsConfig": "apps/server/covidapi/tsconfig.spec.json",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "server-trackerapi": {
       "root": "apps/server/trackerapi",
       "sourceRoot": "apps/server/trackerapi/src",
@@ -229,6 +174,64 @@
           "options": {
             "jestConfig": "apps/server/trackerapi/jest.config.js",
             "tsConfig": "apps/server/trackerapi/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-commonlib": {
+      "projectType": "library",
+      "root": "libs/ui/commonlib",
+      "sourceRoot": "libs/ui/commonlib/src",
+      "prefix": "angular-monorepo",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/ui/commonlib/tsconfig.lib.json",
+              "libs/ui/commonlib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ui/commonlib/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ui/commonlib/jest.config.js",
+            "tsConfig": "libs/ui/commonlib/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/ui/commonlib/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "server-commonlib": {
+      "root": "libs/server/commonlib",
+      "sourceRoot": "libs/server/commonlib/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/server/commonlib/tsconfig.lib.json",
+              "libs/server/commonlib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/server/commonlib/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/server/commonlib/jest.config.js",
+            "tsConfig": "libs/server/commonlib/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }

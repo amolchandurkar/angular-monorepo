@@ -15,7 +15,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@angular-monorepo/ui/commonlib": ["libs/ui/commonlib/src/index.ts"],
+      "@angular-monorepo/server/commonlib": [
+        "libs/server/commonlib/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

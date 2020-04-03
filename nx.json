@@ -26,10 +26,13 @@
       "tags": [],
       "implicitDependencies": ["ui-tracker"]
     },
-    "server-covidapi": {
+    "server-trackerapi": {
       "tags": []
     },
-    "server-trackerapi": {
+    "ui-commonlib": {
+      "tags": []
+    },
+    "server-commonlib": {
       "tags": []
     }
   }
