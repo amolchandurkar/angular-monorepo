@@ -1,31 +1,43 @@
 # AngularMonorepo
 
-# Project Setup
+## Project Setup
 
 This project was generated using [Nx Dev Tool](README-Nx.md)
 
 ## Prerequisite modules and packages
 ### Node
-You need NodeJS installed, you can download it from [node](https://nodejs.org/en/download/)
+You can download Node from [node](https://nodejs.org/en/download/)
+
 Current stable release, as of now is 12.16.1.
+
 Command to check version: node --version
-  v12.16.1
+
+v12.16.1
+
 ### NPM:
 Command to check version: npm --version
-  6.14.4
+
+6.14.4
+
 ### Angular CLI: 
-Install the Angular CLI globally and check the version
-Command to install: npm install -g @angular/cli
-Command to check version: ng --version
-  Angular CLI: 9.1.0
+- Install the Angular CLI globally and check the version
+  - Command to install: npm install -g @angular/cli
+  - Command to check version: ng --version
+
+    Angular CLI: 9.1.0
+
 ### TypeScript: 
 Command to install: npm install -g typescript
 Command to check version: tsc --version
-  3.8.3
+
+3.8.3
+
 ### NestJS
 Command to install: npm i -g @nestjs/cli
 Command to check version:nest --version
-  6.14.2
+
+6.14.2
+
 ### NX:
 Command to install: npm i -g @nrwl/cli
 
