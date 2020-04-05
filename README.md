@@ -1,4 +1,5 @@
 # AngularMonorepo
+This monorepo project builds example application(covid tracker application). It uses some of the existng APIs available to gather data. We will use Angular for the front end and Nest for back end.
 
 ## Project Setup
 
@@ -21,13 +22,13 @@ Command to check version: npm --version
 
 ### Angular CLI: 
 - Install the Angular CLI globally and check the version
-  - Command to install: npm install -g @angular/cli
+  - Command to install: npm i -g @angular/cli
   - Command to check version: ng --version
 
     Angular CLI: 9.1.0
 
 ### TypeScript: 
-- Command to install: npm install -g typescript
+- Command to install: npm i -g typescript
 - Command to check version: tsc --version
 
   3.8.3
@@ -59,14 +60,20 @@ Command to install: npm i -g @nrwl/cli
 ## Creating Nest Service application with nx
   - Create the server API application - ng g @nrwl/nest:application trackerapi --directory=server
   - Run the server app using - ng serve server-trackerapi
+  - The API can be access in browser with URL: http://localhost:3333/api/
+  - In main.ts, change api to api/v1, so we can version the APIs.
+    - `const globalPrefix = ‘api/v1’;`
+  - Enable cors, so the UI layer can call the APIs. Read up on that [NestJS CORS Security](https://docs.nestjs.com/techniques/security#cors).
+    - `app.enableCors();`
+
 ## Workpsace Package json changes
   - Add scripts in the package.json to make application invocation easier during development. 
   - Add following in the scripts section.
     - "start:tracker": "ng serve ui-tracker — open",
     - "start:trackerapi": "ng serve server-trackerapi",
   - Run both the UI and server applications: 
-    - npm run start:covidtracker and
-    - npm run start:covidapi
+    - npm run start:tracker and
+    - npm run start:trackerapi
 ## Creating Shared Library 
   - ng g @nrwl/angular:library commonlib --directory=ui 
   - ng g @nrwl/nest:lib commonlib --directory=server 
@@ -83,7 +90,7 @@ Command to install: npm i -g @nrwl/cli
 
   - The builds are generated in dist folder.
     - "build:tracker”: “ng build ui-tracker --prod",
-    - "build:covidapi”: “ng build server-trackerapi — prod",
+    - "build:trackerdapi”: “ng build server-trackerapi — prod",
   - To create the UI app build, run the following command
     - npm run build:tracker
   - To create the server app build, run the following command
