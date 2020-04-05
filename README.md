@@ -1,86 +1,80 @@
 # AngularMonorepo
 
-[How Project is Setup?](README-ProjectSetup.md)
+# Project Setup
 
-This project was generated using [Nx](https://nx.dev).
+This project was generated using [Nx Dev Tool](README-Nx.md)
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" width="450"></p>
+## Prerequisite modules and packages
+### Node
+You need NodeJS installed, you can download it from [node](https://nodejs.org/en/download/)
+Current stable release, as of now is 12.16.1.
+Command to check version: node --version
+  v12.16.1
+### NPM:
+Command to check version: npm --version
+  6.14.4
+### Angular CLI: 
+Install the Angular CLI globally and check the version
+Command to install: npm install -g @angular/cli
+Command to check version: ng --version
+  Angular CLI: 9.1.0
+### TypeScript: 
+Command to install: npm install -g typescript
+Command to check version: tsc --version
+  3.8.3
+### NestJS
+Command to install: npm i -g @nestjs/cli
+Command to check version:nest --version
+  6.14.2
+### NX:
+Command to install: npm i -g @nrwl/cli
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+## Creating Project
+  npm init nx-workspace angular-monorepo 
+  Select empty workspace option
+  Select Angular CLI for CLI option
+  After workspace creation go to workspace location
+  Add Angular capability to workspace -   ng add @nrwl/angular
+  ng add @nrwl/nest
+## Creating angular UI application with nx
+  ng g @nrwl/angular:application tracker --directory=ui
+  Select SASS when prompted. It is a CSS pre-processor which makes CSS more developer friendly. 
+  For all other prompted question go with defaults
+  Add "start": "ng serve --open" change to package.json to run application with 
+    npm start 
+  The application can be access in browser with URL: http://localhost:4200
+## Creating Nest Service application with nx
+  Create the server API application - ng g @nrwl/nest:application trackerapi --directory=server
+  Run the server app using - ng serve server-trackerapi
+## Workpsace Package json changes
+  Add scripts in the package.json to make application invocation easier during development. 
+  Add following in the scripts section.
+    "start:tracker": "ng serve ui-tracker — open",
+    "start:trackerapi": "ng serve server-trackerapi",
+  Run both the UI and server applications: 
+    npm run start:covidtracker and
+    npm run start:covidapi
+## Creating Shared Library 
+  ng g @nrwl/angular:library commonlib --directory=ui 
+  ng g @nrwl/nest:lib commonlib --directory=server 
+## Creating Client Service Consumer
+  ng g service tracker --project=ui-tracker --dry-run
+  ng g service tracker --project=ui-tracker
+## Creating Client UI
 
-## Quick Start & Documentation
+## Check Dependency Graph
+  npm run dep-graph
 
-[Nx Documentation](https://nx.dev/angular)
+## Application Build
+  Update the package.json scripts with the following to build the UI/Server apps and libraries easily. 
+  The builds are generated in dist folder.
+    "build:tracker”: “ng build ui-tracker --prod",
+    "build:covidapi”: “ng build server-trackerapi — prod",
+  To create the UI app build, run the following command
+    npm run build:tracker
+  To create the server app build, run the following command
+    npm run build:trackerapi
+## Running Application
+  1. npm run start:trackerapi
+  2. npm run start:tracker
 
-[10-minute video showing all Nx features](https://nx.dev/angular/getting-started/what-is-nx)
-
-[Interactive Tutorial](https://nx.dev/angular/tutorial/01-create-application)
-
-## Adding capabilities to your workspace
-
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
-
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
-
-Below are some plugins which you can add to your workspace:
-
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
-
-## Generate an application
-
-Run `ng g @nrwl/angular:app my-app` to generate an application.
-
-> You can use any of the plugins above to generate applications as well.
-
-When using Nx, you can create multiple applications and libraries in the same workspace.
-
-## Generate a library
-
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are sharable across libraries and applications. They can be imported from `@angular-monorepo/mylib`.
-
-## Development server
-
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng g component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
